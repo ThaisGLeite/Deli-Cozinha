@@ -24,10 +24,6 @@ class App extends React.Component {
               <div className="container-login-form-btn">
                 <button className="login-form-btn">Login</button>
               </div>
-              <div className="text-center">
-                <span className="txt1">Criar Conta</span>
-                <a className="txt2" href="#"></a>
-              </div>
             </form>
           </div>
         </div>
