@@ -2,25 +2,24 @@ import React, { useState } from "react";
 import logo from "./asseets/logo1.png";
 import "./style.css";
 
-const App = () => {
-  const [email, setEmail] = useState("");
+const Login = () => {
+  const [usuario, setUsuario] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const API_URL = process.env.LOGIN_API_URL || "https://your-api-url.com";
-
+    const API_URL = process.env.REACT_APP_LOGIN_API_URL;
     try {
+      console.log("Entrou na chamada da API");
       const response = await fetch(API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email,
-          password,
+          nome: usuario,
+          senha: password,
         }),
       });
 
@@ -49,21 +48,25 @@ const App = () => {
             </span>
             <div className="wrap-input">
               <input
-                className="input"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                name="usuario"
+                className={usuario ? "has-value input" : "input"}
+                type="text"
+                value={usuario}
+                autoComplete="on"
+                onChange={(e) => setUsuario(e.target.value)}
               />
-              <span className="focus-input" data-placeholder="Email" />
+              <span className="focus-input" data-placeholder="Usuario" />
             </div>
             <div className="wrap-input">
               <input
-                className="input"
+                name="password"
+                className={password ? "has-value input" : "input"}
                 type="password"
                 value={password}
+                autoComplete="on"
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <span className="focus-input" data-placeholder="Password" />
+              <span className="focus-input" data-placeholder="Senha" />
             </div>
             <div className="container-login-form-btn">
               <button className="login-form-btn" type="submit">
@@ -78,4 +81,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Login;
