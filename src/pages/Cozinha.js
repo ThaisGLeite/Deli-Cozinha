@@ -1,20 +1,43 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthContext";
+import styles from "../css/Cozinha.module.css";
 
 const Cozinha = () => {
   const { isAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [orders, setOrders] = useState([]);
 
-  // If the user is not authenticated, redirect them to the login page
+  // useEffect to redirect if user is not authenticated
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated, navigate]);
+
+  // Simulate dynamic orders update every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setOrders((prevOrders) => [...prevOrders, `Order ${Date.now()}`]);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Return null while isAuthenticated is false
   if (!isAuthenticated) {
-    navigate("/");
+    return null;
   }
 
   return (
-    <div>
-      <h1>About Page</h1>
-      <p>This is the About page of our application.</p>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Pedidos:</h1>
+      <ul className={styles.orderList}>
+        {orders.map((order, index) => (
+          <li key={index} className={styles.orderItem}>
+            {order}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

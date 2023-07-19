@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
 import logo from "./asseets/logo1.png";
-import "./style.css";
+import "./css/style.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -39,7 +39,7 @@ const Login = () => {
         // Set isAuthenticated state to true upon successful login
         setIsAuthenticated(true);
         // Navigate to the kitchen page using React Router
-        navigate("/cozinha"); // MODIFIED: Use navigate instead of history.push
+        navigate("/cozinha");
       }
 
       // Handle API response error as needed

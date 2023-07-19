@@ -11,21 +11,11 @@ createRoot(rootElement).render(
   <React.StrictMode>
     <AuthProvider>
       <Router>
-        <App /> {/* You can remove this */}
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/cozinha" element={<Cozinha />} />
+        </Routes>
       </Router>
     </AuthProvider>
   </React.StrictMode>
 );
-
-function MainRoutes() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/cozinha" element={<Cozinha />} />
-      </Routes>
-    </Router>
-  );
-}
-
-export default MainRoutes;
