@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "./AuthContext";
 import logo from "./asseets/logo1.png";
 import "./style.css";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { setIsAuthenticated } = useContext(AuthContext); // Use AuthContext to get setIsAuthenticated
   const [usuario, setUsuario] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -30,7 +34,15 @@ const Login = () => {
       const data = await response.json();
       console.log(data);
 
-      // Handle API response as needed
+      // Check if the API response is "Authorized"
+      if (data === "Authorized") {
+        // Set isAuthenticated state to true upon successful login
+        setIsAuthenticated(true);
+        // Navigate to the kitchen page using React Router
+        navigate("/cozinha"); // MODIFIED: Use navigate instead of history.push
+      }
+
+      // Handle API response error as needed
     } catch (err) {
       console.error(err);
       setError(err.message);
@@ -42,7 +54,7 @@ const Login = () => {
       <div className="container-login">
         <div className="wrap-login">
           <form className="login-form" onSubmit={handleSubmit}>
-            <span className="login-form-title">Cozinha</span>
+            <span className="login-form-title">Cozinha - Login</span>
             <span className="login-form-title">
               <img src={logo} alt="logo" />
             </span>
