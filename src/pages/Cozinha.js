@@ -18,7 +18,7 @@ const Cozinha = () => {
   // Simulate dynamic orders update every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setOrders((prevOrders) => [...prevOrders, `Order ${Date.now()}`]);
+      setOrders((prevOrders) => [...prevOrders, `Pedido ${Date.now()}`]);
     }, 5000);
     return () => clearInterval(interval);
   }, []);
@@ -34,12 +34,13 @@ const Cozinha = () => {
       <ul className={styles.orderList}>
         {orders.map((order, index) => (
           <li key={index} className={styles.orderItem}>
-            {order}
+            <button onClick={() => console.log(`Clicked: ${order}`)}>
+              {order}
+            </button>
           </li>
         ))}
       </ul>
     </div>
   );
 };
-
 export default Cozinha;

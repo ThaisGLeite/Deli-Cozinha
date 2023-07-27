@@ -17,8 +17,21 @@
 }
 
 .orderItem {
-  background-color: #fff;
+  margin-bottom: 20px;
+}
+
+.orderItem button {
+  background-color: white;
+  color: #333;
+  border: none;
+  padding: 50px;
   border-radius: 5px;
-  padding: 15px;
-  margin-bottom: 10px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  font-size: 1.5rem;
+}
+
+.orderItem button:hover {
+  background-color: #b4ecb1;
 }
